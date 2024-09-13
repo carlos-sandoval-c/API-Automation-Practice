@@ -1,7 +1,9 @@
 package com.globant.steps;
 
+import com.globant.models.common.Client;
 import com.globant.models.common.Resource;
 import com.globant.models.requests.ResourcesRequest;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -70,6 +72,31 @@ public class ResourceSteps {
         }
     }
 
+    @When("I get the latest added resource")
+    public void iGetTheLatestAddedResource() {
+        resourcesList = secureGetResourcesList();
+        Resource latestAddedResource = null;
+        for (Resource r : resourcesList) {
+            if (latestAddedResource == null || Integer.parseInt(r.getId()) > Integer.parseInt(latestAddedResource.getId()))
+                latestAddedResource = r;
+        }
+
+        resource = latestAddedResource;
+    }
+
+    @When("I update all parameters of this resource")
+    public void iUpdateAllParametersOfThisResource() {
+        Resource newResource = resourcesRequest.generateRandomResource();
+        newResource.setId(resource.getId());
+        resource = newResource;
+    }
+
+    @When("I send a PUT request to update the resource")
+    public void iSendAPUTRequestToUpdateTheResource() {
+        response = resourcesRequest.updateResource(resource.getId(), resource);
+        Assert.assertEquals(200, response.getStatusCode());
+    }
+
     @Then("the resource response should have a status code of {int}")
     public void theResponseShouldHaveAStatusCodeOf(int statusCode) {
         Assert.assertEquals(statusCode, response.statusCode());
@@ -89,5 +116,14 @@ public class ResourceSteps {
         Assert.assertNotNull(response);
         Assert.assertTrue(resourcesRequest.isValidSchema(response, path));
         logger.info("Successfully Validated schema from Resource List object");
+    }
+
+    @Then("delete all the registered resources")
+    public void deleteAllTheRegisteredResources() {
+        List<Resource> allResourceList = secureGetResourcesList();
+        for (Resource r : allResourceList) {
+            response = resourcesRequest.deleteResource(r.getId());
+            Assert.assertEquals(200, response.statusCode());
+        }
     }
 }
