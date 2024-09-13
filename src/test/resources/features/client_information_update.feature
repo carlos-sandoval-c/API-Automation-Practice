@@ -5,7 +5,7 @@ Feature: Client information update
   so that I can reflect my most recent data and ensure it accurate.
 
   @smoke
-   Scenario: Update client phone number
+  Scenario: Update client phone number
     Given there are at least 10 registered clients in the system
     When I retrieve the details of the client with name "Laura"
     And I save the current client phone number

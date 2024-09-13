@@ -21,7 +21,7 @@ public class CommonHooks {
     }
 
     @After
-    public void cleanUp(Scenario scenario){
+    public void cleanUp(Scenario scenario) {
         logger.info("*****************************************************************************************");
         logger.info("	Scenario finished: " + scenario.getName() + " | " + scenario.getStatus());
         logger.info("*****************************************************************************************");
