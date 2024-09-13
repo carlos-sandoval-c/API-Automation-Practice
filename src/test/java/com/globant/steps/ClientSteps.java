@@ -34,6 +34,12 @@ public class ClientSteps {
         return clientsList;
     }
 
+    @Given("that the system is active")
+    public void thatTheSystemIsActive() {
+        response = clientRequest.getClients();
+        Assert.assertEquals(200, response.statusCode());
+    }
+
     @Given("there are at least {int} registered clients in the system")
     public void verifyAtLeastClientsRegistered(int minClients) {
         int currentRegisteredClients = secureGetClientsList().size();
@@ -44,6 +50,12 @@ public class ClientSteps {
             Assert.assertEquals(201, response.statusCode());
             currentRegisteredClients++;
         }
+    }
+
+    @Given("I have random user information")
+    public void randomUserGeneration() {
+        client = clientRequest.generateRandomClient();
+        Assert.assertNotNull(client);
     }
 
     @When("I retrieve the details of the client with name {string}")
@@ -74,20 +86,48 @@ public class ClientSteps {
         Assert.assertNotNull(client);
         oldClient = client;
         logger.info("Number saved!");
-        logger.info(oldClient);
+        client.setPhone(new Faker().phoneNumber().cellPhone());
+        logger.info("Local client has the new phone");
     }
 
-    @When("validate the new phone number is different")
-    public void validateTheNewPhoneNumberIsDifferent() {
-        Assert.assertNotNull(client);
-        Assert.assertNotNull(oldClient);
-
-        client.setPhone(new Faker().phoneNumber().cellPhone());
+    @When("I send a PUT request to update the saved client")
+    public void updateSavedClient() {
         response = clientRequest.updateClient(oldClient.getId(), client);
         Assert.assertEquals(200, response.statusCode());
+        userValidatesResponseWithClientJSONSchema();
 
         Client onServiceClient = clientRequest.getClientEntity(response);
         Assert.assertNotSame(oldClient.getPhone(), onServiceClient.getPhone());
+    }
+
+    @When("I send a POST request to create a client")
+    public void createANewClient() {
+        response = clientRequest.createClient(client);
+        Assert.assertEquals(201, response.statusCode());
+        logger.info("New user created");
+        client = clientRequest.getClientEntity(response);
+    }
+
+    @When("retrieve the details of last client created")
+    public void retrieveTheDetailsOfLastClientCreated() {
+        response = clientRequest.getClient(client.getId());
+        userValidatesResponseWithClientJSONSchema();
+        logger.info("Created users has been retrieved");
+        Assert.assertEquals(200, response.statusCode());
+    }
+
+    @When("change email parameter of created client")
+    public void changeEmailParameterOfClient() {
+        oldClient = client;
+        client.setEmail(new Faker().internet().emailAddress());
+    }
+
+    @When("delete the created client")
+    public void deleteSavedClient() {
+        Assert.assertNotNull(client.getId());
+        response = clientRequest.deleteClient(client.getId());
+        Assert.assertEquals(200, response.statusCode());
+        client = oldClient = null;
     }
 
     @Then("the response should have a status code of {int}")
@@ -117,4 +157,5 @@ public class ClientSteps {
             Assert.assertEquals(200, response.statusCode());
         }
     }
+
 }
