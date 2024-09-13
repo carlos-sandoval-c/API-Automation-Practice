@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Resource {
     private String name;
-    private String tradeMark;
+    private String trademark;
     private int stock;
     private double price;
     private String description;

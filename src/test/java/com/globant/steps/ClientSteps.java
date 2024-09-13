@@ -130,7 +130,7 @@ public class ClientSteps {
         client = oldClient = null;
     }
 
-    @Then("the response should have a status code of {int}")
+    @Then("the client response should have a status code of {int}")
     public void theResponseShouldHaveAStatusCodeOf(int statusCode) {
         Assert.assertEquals(statusCode, response.statusCode());
     }

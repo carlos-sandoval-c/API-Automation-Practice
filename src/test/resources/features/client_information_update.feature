@@ -10,7 +10,7 @@ Feature: Client information update
     When I retrieve the details of the client with name "Laura"
     And I save the current client phone number
     And I send a PUT request to update the saved client
-    Then the response should have a status code of 200
+    Then the client response should have a status code of 200
     And validates the response with client JSON schema
     And delete all the registered clients
 
@@ -23,4 +23,4 @@ Feature: Client information update
     And change email parameter of created client
     When I send a PUT request to update the saved client
     And delete the created client
-    Then the response should have a status code of 200
+    Then the client response should have a status code of 200
