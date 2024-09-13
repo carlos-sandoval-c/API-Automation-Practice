@@ -5,5 +5,5 @@ public class Constants {
     public static final String API_URL = "/api/v1/%s";
     public static final String API_URL_WITH_PARAM = "/api/v1/%s/%s";
     public static final String CLIENTS_ENDPOINT = "clients";
-    public static final String RESOURCES_ENDPOINT = "clients";
+    public static final String RESOURCES_ENDPOINT = "resources";
 }
