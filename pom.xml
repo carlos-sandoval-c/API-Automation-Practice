@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
-        <testng.version>7.10.2</testng.version>
+        <junit.version>5.11.0</junit.version>
         <log4j.version>2.23.1</log4j.version>
         <faker.version>1.0.2</faker.version>
         <rest.assured.version>5.5.0</rest.assured.version>
@@ -23,13 +23,14 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -83,7 +84,7 @@
         <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-testng</artifactId>
+            <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
         </dependency>
     </dependencies>
