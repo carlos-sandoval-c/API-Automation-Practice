@@ -1,6 +1,6 @@
 package com.globant.utils.baseRequest;
 
-import com.globant.headers.HeadersEnum;
+import com.globant.models.headers.HeadersEnum;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -33,7 +33,7 @@ public class BaseRequest {
                 .put(endpoint);
     }
 
-    protected Response requestPost(String endpoint, Map<String, String> headers) {
+    protected Response requestDelete(String endpoint, Map<String, String> headers) {
         return RestAssured.given()
                 .contentType(HeadersEnum.CONTENT_TYPE.getValue())
                 .headers(headers)
