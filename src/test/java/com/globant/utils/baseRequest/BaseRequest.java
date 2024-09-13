@@ -7,6 +7,8 @@ import io.restassured.response.Response;
 import java.util.Map;
 
 public class BaseRequest {
+    protected String endpoint;
+
     protected Response requestGet(String endpoint, Map<String, String> headers) {
         return RestAssured.given()
                 .contentType(HeadersEnum.CONTENT_TYPE.getValue())
