@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
         glue = "com.globant.steps",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         monochrome = true,
+        tags = "@active",
         plugin = {"pretty:target/cucumber/cucumber.txt",
                 "html:target/cucumber/report",
                 "json:target/cucumber.json"}

@@ -2,6 +2,7 @@ package com.globant.utils.baseRequest;
 
 import com.globant.models.headers.HeadersEnum;
 import io.restassured.RestAssured;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 
 import java.util.Map;
@@ -41,5 +42,16 @@ public class BaseRequest {
                 .headers(headers)
                 .when()
                 .delete(endpoint);
+    }
+
+    public boolean isValidSchema(Response response, String schemaPath) {
+        try {
+            response.then()
+                    .assertThat()
+                    .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(schemaPath));
+            return true;
+        } catch (AssertionError e) {
+            return false;
+        }
     }
 }
