@@ -1,9 +1,7 @@
 package com.globant.steps;
 
-import com.globant.models.common.Client;
 import com.globant.models.common.Resource;
 import com.globant.models.requests.ResourcesRequest;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
