@@ -7,8 +7,6 @@ import com.globant.utils.constants.Constants;
 import io.restassured.response.Response;
 
 public class ClientRequest extends BaseRequest {
-    private String endpoint;
-
     public Response getClients() {
         endpoint = String.format(Constants.API_URL, Constants.CLIENTS_ENDPOINT);
         return requestGet(endpoint, HeadersBuilder.getBaseHeaders());
