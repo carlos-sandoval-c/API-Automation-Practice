@@ -1,4 +1,4 @@
-package com.globant.models;
+package com.globant.models.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

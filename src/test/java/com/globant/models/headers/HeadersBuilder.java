@@ -1,4 +1,4 @@
-package com.globant.headers;
+package com.globant.models.headers;
 
 import java.util.HashMap;
 import java.util.Map;
