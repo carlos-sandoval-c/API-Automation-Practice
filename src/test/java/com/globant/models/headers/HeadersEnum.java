@@ -1,6 +1,5 @@
 package com.globant.models.headers;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
